@@ -9,8 +9,14 @@ function Button({
     href,
     primary = false,
     outline = false,
+    rounded = false,
+    text = false,
     small = false,
     large = false,
+    disabled = false,
+    className,
+    leftIcon,
+    rightIcon,
     children,
     onClick,
     ...passProps
@@ -19,8 +25,12 @@ function Button({
     const classes = cx('wrapper', {
         primary,
         outline,
+        rounded,
         small,
         large,
+        text,
+        disabled,
+        [className]: className,
     });
 
     const _props = {
@@ -30,9 +40,20 @@ function Button({
         ...passProps,
     };
 
+    // Remove event listener when btn is disabled
+    if (disabled) {
+        Object.keys(_props).forEach((key) => {
+            if (key.startsWith('on') && typeof _props[key] === 'function') {
+                delete _props[key];
+            }
+        });
+    }
+
     return (
         <Comp className={classes} {..._props}>
-            <span>{children}</span>
+            {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
+            <span className={cx('title')}>{children}</span>
+            {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
         </Comp>
     );
 }

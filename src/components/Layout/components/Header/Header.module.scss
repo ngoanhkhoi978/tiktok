@@ -98,3 +98,15 @@
 .search-result {
     width: var(--search-width);
 }
+
+.custom-login {
+    color: var(--primary);
+}
+
+.more-btn {
+    font-size: 2rem;
+    margin-left: 24px;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px 8px;
+}
